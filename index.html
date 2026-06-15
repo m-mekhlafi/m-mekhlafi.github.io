@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-lang="en">
+<head>
+    <!-- أضف في <head> -->
+    <link rel="icon" href="data:,">
+    <meta name="description" content="Mohammed AL-Mekhlafi - Cybersecurity & Web Developer from Yemen">
+    <meta property="og:title" content="Mohammed | Cybersecurity Engineer">
+    <meta property="og:description" content="Portfolio of Mohammed AL-Mekhlafi, Cybersecurity student & Web Developer">
+    <meta property="og:image" content="https://m-mekhlafi.github.io/img/M1.jpg">
+    <meta property="og:url" content="https://m-mekhlafi.github.io">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@400;500;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com https://formspree.io; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;">
+
+    <title>Mohammed | Cybersecurity & Web Developer</title>
+
+    <!--
+      ============================================================
+      FONTS
+      - Inter        : clean, professional Latin font
+      - Fira Code    : monospace for code-style elements
+      - Tajawal      : Arabic-optimized font (used in RTL mode)
+      ============================================================
+    -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Fira+Code:wght@400;500&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<!-- ============================================================
+     CIRCUIT BOARD BACKGROUND (purely decorative)
+============================================================ -->
+<div id="stars-container" aria-hidden="true">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>
+</div>
+
+<!-- ============================================================
+     NAVIGATION BAR
+     data-target attributes link buttons to view IDs via JS.
+============================================================ -->
+<header>
+
+    <nav id="navbar">
+        <div class="container nav-inner">
+            <a href="#view-hero" class="logo" onclick="event.preventDefault(); showView('view-hero');" style="cursor: pointer;">
+                <div class="checkbox-container">
+                    <input class="checkbox-input" id="hacker-checkbox" type="checkbox" />
+                    <label class="checkbox-label" for="hacker-checkbox" onclick="event.stopPropagation();">
+                        <span class="checkmark"></span>
+                        <div class="grid-bg"></div>
+                        <div class="glitch-overlay-h"></div>
+                        <div class="glitch-overlay-v"></div>
+                        <div class="binary-particles">
+                            <span style="left: 10%; animation-delay: 0s;" class="particle">1</span>
+                            <span style="left: 30%; animation-delay: -0.2s;" class="particle">0</span>
+                            <span style="left: 50%; animation-delay: -0.4s;" class="particle">1</span>
+                            <span style="left: 70%; animation-delay: -0.6s;" class="particle">0</span>
+                            <span style="left: 90%; animation-delay: -0.8s;" class="particle">1</span>
+                        </div>
+                    </label>
+                </div>
+            </a>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+
+            <div class="nav-links" id="navLinks">
+                <button class="nav-btn active" data-target="view-hero"   data-en="Home"       data-ar="الرئيسية">Home</button>
+                <button class="nav-btn"        data-target="view-about"  data-en="About Me"   data-ar="عني">About Me</button>
+                <button class="nav-btn"        data-target="view-skills" data-en="Tech Stack"    data-ar="مهاراتي">Tech Stack</button>
+                <button class="nav-btn"        data-target="view-projects" data-en="Projects" data-ar="مشاريعي">Projects</button>
+                <button class="nav-btn"        data-target="view-contact"   data-en="Contact" data-ar="تواصل معي">Contact Me</button>
+            </div>
+
+            <div class="nav-controls">
+
+
+                <a href="https://github.com/m-mekhlafi" class="gh-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7 c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176 .765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297 c0-6.627-5.373-12-12-12"/>
+                    </svg>
+                </a>
+
+
+                <label class="switch" style="margin: 0 10px;">
+                    <input id="theme-input" type="checkbox" checked />
+                    <div class="slider round">
+                        <div class="sun-moon">
+
+                            <svg id="moon-dot-1" class="moon-dot" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"></circle></svg>
+                            <svg id="moon-dot-2" class="moon-dot" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"></circle></svg>
+                            <svg id="moon-dot-3" class="moon-dot" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"></circle></svg>
+                            <svg id="light-ray-1" class="light-ray" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"></circle></svg>
+                            <svg id="light-ray-2" class="light-ray" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"></circle></svg>
+                            <svg id="light-ray-3" class="light-ray" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"></circle></svg>
+
+                            <svg id="cloud-1" class="cloud-dark" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"></circle></svg>
+                            <svg id="cloud-2" class="cloud-dark" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"></circle></svg>
+                            <svg id="cloud-3" class="cloud-dark" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"></circle></svg>
+                            <svg id="cloud-4" class="cloud-light" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"></circle></svg>
+                            <svg id="cloud-5" class="cloud-light" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"></circle></svg>
+                            <svg id="cloud-6" class="cloud-light" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"></circle></svg>
+
+                        </div>
+                        <div class="stars">
+                            <svg id="star-1" class="star" viewBox="0 0 20 20"><path d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z"></path></svg>
+                            <svg id="star-2" class="star" viewBox="0 0 20 20"><path d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z"></path></svg>
+                            <svg id="star-3" class="star" viewBox="0 0 20 20"><path d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z"></path></svg>
+                            <svg id="star-4" class="star" viewBox="0 0 20 20"><path d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z"></path></svg>
+
+                        </div>
+                    </div>
+                </label>
+                <span class="beta-label">BETA</span>
+            </div>
+
+
+                <!-- قائمة اللغات المنسدلة -->
+                <div class="lang-dropdown">
+                    <button class="lang-toggle" id="langToggleBtn" aria-expanded="false">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2s.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56zm2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2s.07-1.34.16-2h4.68c.09.66.16 1.32.16 2s-.07 1.34-.16 2zm1.15 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2s-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"/></svg>
+                        <span id="currentLangText">عربي</span>
+                    </button>
+                    <div class="lang-menu" id="langMenu">
+                        <button class="lang-option" data-lang-val="ar">العربية (Native)</button>
+                        <button class="lang-option" data-lang-val="en">English (Native)</button>
+                        <button class="lang-option" data-lang-val="tr">Türkçe</button>
+
+                    </div>
+                </div>
+            </div>
+    </nav>
+</header>
+
+<!-- ============================================================
+              LOADING SCREEN (PRELOADER)
+============================================================ -->
+<div id="cyber-preloader">
+    <div class="macbook">
+        <div class="inner">
+            <div class="screen">
+                <div class="face-one">
+                    <div class="camera"></div>
+                    <div class="display">
+                        <div class="shade"></div>
+                    </div>
+                    <span>cyber team</span>
+                </div>
+            </div>
+            <div class="macbody">
+                <div class="face-one">
+                    <div class="touchpad"></div>
+                    <div class="keyboard">
+                        <div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key space"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key f"></div><div class="key f"></div><div class="key f"></div><div class="key f"></div><div class="key f"></div><div class="key f"></div><div class="key f"></div><div class="key f"></div><div class="key f"></div><div class="key f"></div><div class="key f"></div><div class="key f"></div><div class="key f"></div><div class="key f"></div><div class="key f"></div><div class="key f"></div>
+                    </div>
+                </div>
+                <div class="pad one"></div><div class="pad two"></div><div class="pad three"></div><div class="pad four"></div>
+            </div>
+        </div>
+        <div class="shadow"></div>
+    </div>
+</div>
+
+<div id="stars-container" aria-hidden="true">
+</div>
+
+<!-- ============================================================
+     APP CONTAINER — All views live here.
+     JS shows/hides views by toggling .active-view.
+============================================================ -->
+<main id="app">
+
+    <!-- ========================================================
+         VIEW: HERO
+    ======================================================== -->
+    <section id="view-hero" class="view active-view" aria-label="Hero">
+        <div class="hero-inner">
+
+            <!-- Left: text content -->
+            <div class="hero-text">
+                <p class="hero-tag" data-en="&#x276F; Passionate Tech Student &amp; Engineer" data-ar="&#x276F; طالب تقني ومهندس طموح">&#x276F; Passionate Tech Student &amp; Engineer</p>
+
+                <h1 class="hero-name">
+                    <span data-en="Mohammed" data-ar="محمد">Mohammed</span>
+                    <span class="accent">.</span><span class="cursor"></span>
+                </h1>
+
+                <p class="hero-role" data-en="Cybersecurity and Web Developer Engineer" data-ar="مهندس أمن سيبراني ومطور ويب">
+                    Cybersecurity and Web Developer Engineer
+                </p>
+
+                <div class="hero-cta">
+                    <button class="btn-primary" data-target="view-projects"
+                            data-en="&#128196; View Projects" data-ar="&#128196; مشاريعي">
+                        &#128196; View Projects
+                    </button>
+                    <button class="btn-ghost" data-target="view-about"
+                            data-en="&#128188; About Me" data-ar="&#128188; عني">
+                        &#128188; About Me
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right: profile avatar -->
+            <div class="hero-avatar-wrap" aria-hidden="true">
+                <!--
+
+                  TO ADD YOUR PHOTO:
+                  Replace the placeholder div below with:
+                  <img src="your-photo.jpg" alt="Mohammed" class="hero-avatar" />
+                -->
+                <div class="avatar-placeholder">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.2" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="8" r="4"/>
+                        <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+                    </svg>
+                    <img src="img/M1.jpg" alt="Mohammed AL-Mekhlafi - Cybersecurity Engineer" class="hero-avatar" />
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ========================================================
+         VIEW: ABOUT ME
+    ======================================================== -->
+    <section id="view-about" class="view" aria-labelledby="about-heading">
+        <div class="container">
+
+            <h2 class="sec-title" id="about-heading">
+                <span data-en="About" data-ar="عن">About</span> <span data-en="Me" data-ar="محمد">Me</span>
+            </h2>
+            <p class="sec-subtitle" data-en="// my story" data-ar="// قصتي">// my story</p>
+
+            <div class="about-grid">
+
+
+                <div class="about-text">
+                    <p data-en="I am <strong>Mohammed Emad AL-Mekhlafi</strong>, a <span class='hl'>Cybersecurity and Web Developer Engineer</span> from Sana'a, Yemen. My passion for technology was born in an environment of extreme adversity. Growing up amidst conflict and severe economic hardship, I found my refuge and purpose in the digital world."
+                       data-ar="أنا <strong>محمد عماد المخلافي</strong>، مهندس ويب وأمن سيبراني من صنعاء، اليمن. وُلد شغفي بالتقنية من رحم المعاناة الشديدة؛ فنشأتي وسط النزاعات والصعوبات الاقتصادية القاسية جعلتني أجد ملاذي وهدفي في العالم الرقمي.">
+                        I am <strong>Mohammed Emad AL-Mekhlafi</strong>, a <span class="hl">Cybersecurity and Web Developer Engineer</span> from Sana'a, Yemen. My passion for technology was born in an environment of extreme adversity. Growing up amidst conflict and severe economic hardship, I found my refuge and purpose in the digital world.
+                    </p>
+
+                    <p data-en="Currently a first-year Cybersecurity student at <span class='hl'>Al-Razi University</span>, I quickly realized that the local educational infrastructure and outdated curricula could not keep pace with global technological advancements. Faced with a severe lack of modern resources, I took my education into my own hands. I turned to the internet, teaching myself advanced programming, systems administration, and network security, proving that self-driven learning can transcend physical borders."
+                       data-ar="كطالب في السنة الأولى تخصص أمن سيبراني في <strong>جامعة الرازي</strong>، أدركت سريعاً أن البنية التحتية التعليمية المحلية والمناهج القديمة لا يمكنها مواكبة التطورات التقنية العالمية. وفي ظل غياب الموارد الحديثة، أخذت زمام تعليمي بنفسي؛ فتوجهت إلى الإنترنت لتعلم البرمجة المتقدمة، إدارة الأنظمة، والأمن السيبراني ذاتياً، مُثبتاً أن التعلم الذاتي يمكنه عُبور الحدود الجغرافية.">
+                        Currently, a first-year Cybersecurity student at <span class="hl">Al-Razi University</span>, I quickly realized that the local educational infrastructure and outdated curricula could not keep pace with global technological advancements. Faced with a severe lack of modern resources, I took my education into my own hands. I turned to the internet, teaching myself advanced programming, systems administration, and network security, proving that self-driven learning can transcend physical borders.
+                    </p>
+
+                    <p data-en="However, self-learning in a constrained environment has its limits. I am actively <span class='hl'>seeking international scholarships</span> to continue my education in a world-class institution. My vision extends beyond personal success; I am a fierce advocate for the Free and Open Source Software (FOSS) movement. I believe that high-quality education and technical knowledge should be freely accessible to everyone, provided it is used ethically to build communities, not harm them."
+                       data-ar="ومع ذلك، فإن للتعلم الذاتي في بيئة مليئة بالقيود حدوداً. لذلك، أنا أسعى بنشاط للحصول على <strong>منح دراسية دولية</strong> لمتابعة تعليمي في مؤسسة عالمية. إن رؤيتي تتجاوز النجاح الشخصي؛ فأنا مناصر شرس لحركة البرمجيات الحرة ومفتوحة المصدر (FOSS)، وأؤمن بأن التعليم عالي الجودة والمعرفة التقنية يجب أن تكون متاحة بحرية للجميع، بشرط استخدامها أخلاقياً لبناء المجتمعات لا لإيذائها.">
+                        However, self-learning in a constrained environment has its limits. I am actively <span class="hl">seeking international scholarships</span> to continue my education in a world-class institution. My vision extends beyond personal success; I am a fierce advocate for the Free and Open Source Software (FOSS) movement. I believe that high-quality education and technical knowledge should be freely accessible to everyone, provided it is used ethically to build communities, not harm them.
+                    </p>
+
+                    <p data-en="I am driven, innovative, and ready to leave a historical mark in the cybersecurity field. <strong>All I need is the opportunity.</strong>"
+                       data-ar="أنا طموح، مبتكر، ومستعد لترك بصمة تاريخية في مجال الأمن السيبراني. <strong>كل ما أحتاجه هو الفرصة فقط.</strong>">
+                        I am driven, innovative, and ready to leave a historical mark in the cybersecurity field. <strong>All I need is the opportunity.</strong>
+                    </p>
+                </div>
+
+                <div class="about-facts">
+                    <div class="fact-card">
+                        <p class="fact-label" data-en="🎓 Status" data-ar="🎓 الحالة">🎓 Status</p>
+                        <p data-en="B.Sc. Cybersecurity Student — Al-Razi University, Yemen" data-ar="طالب بكالوريوس أمن سيبراني — جامعة الرازي، اليمن">B.Sc. Cybersecurity Student — Al-Razi University, Yemen</p>
+                    </div>
+                    <div class="fact-card">
+                        <p class="fact-label" data-en="📍 Location" data-ar="📍 الموقع">📍 Location</p>
+                        <p data-en="Sana'a, Republic of Yemen" data-ar="صنعاء، الجمهورية اليمنية">Sana'a, Republic of Yemen</p>
+                    </div>
+                    <div class="fact-card">
+                        <p class="fact-label" data-en="🌍 Goal" data-ar="🌍 الهدف">🌍 Goal</p>
+                        <p data-en="International Scholarship (Cybersecurity / Software Engineering)" data-ar="منحة دراسية دولية (أمن سيبراني / هندسة برمجيات)">International Scholarship (Cybersecurity / Software Engineering)</p>
+                    </div>
+                    <div class="fact-card">
+                        <p class="fact-label" data-en="💡 Strengths" data-ar="💡 نقاط القوة">💡 Strengths</p>
+                        <p data-en="Self-taught, Problem-solver, Hardware & Software Versatility" data-ar="متعلم ذاتي، حل المشكلات، مرونة في التعامل مع العتاد والبرمجيات">Self-taught, Problem-solver, Hardware &amp; Software Versatility</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ========================================================
+         VIEW: Tech Stack (SKILLS)
+         JS reads data-level="N" on each .skill-card and renders
+         N filled stars out of 5.
+    ======================================================== -->
+    <section id="view-skills" class="view" aria-labelledby="skills-heading">
+        <div class="container skills-wrap">
+
+            <h2 class="sec-title" id="skills-heading">
+                <span data-en="My" data-ar="">My</span> <span data-en="Tech Stack" data-ar="ترسانتي">Tech Stack</span>
+            </h2>
+            <p class="sec-subtitle" data-en="// diagnostic level of core competencies" data-ar="// الفحص التشخيصي لمستويات الكفاءة الأساسية">// diagnostic level of core competencies</p>
+
+            <p class="skill-cat-title" data-en="Programming &amp; Web" data-ar="البرمجة والويب">Programming &amp; Web</p>
+            <div class="arsenal-matrix-grid">
+                <div class="cyber-skill-card" data-progress="80"><p class="skill-name">C++</p></div>
+                <div class="cyber-skill-card" data-progress="60"><p class="skill-name">C</p></div>
+                <div class="cyber-skill-card" data-progress="80"><p class="skill-name">Python</p></div>
+                <div class="cyber-skill-card" data-progress="100"><p class="skill-name">HTML</p></div>
+                <div class="cyber-skill-card" data-progress="80"><p class="skill-name">CSS</p></div>
+                <div class="cyber-skill-card" data-progress="60"><p class="skill-name">JavaScript</p></div>
+                <div class="cyber-skill-card" data-progress="60"><p class="skill-name">SQL</p></div>
+                <div class="cyber-skill-card" data-progress="60"><p class="skill-name">Algorithms</p></div>
+                <div class="cyber-skill-card" data-progress="60"><p class="skill-name">Flask</p></div>
+                <div class="cyber-skill-card" data-progress="40"><p class="skill-name">Node.js</p></div>
+            </div>
+
+            <p class="skill-cat-title" data-en="Systems &amp; Networks" data-ar="الأنظمة والشبكات">Systems &amp; Networks</p>
+            <div class="arsenal-matrix-grid">
+                <div class="cyber-skill-card" data-progress="90"><p class="skill-name">Linux Customization</p></div>
+                <div class="cyber-skill-card" data-progress="60"><p class="skill-name">Open-source Admin</p></div>
+                <div class="cyber-skill-card" data-progress="90"><p class="skill-name">Debian</p></div>
+                <div class="cyber-skill-card" data-progress="88"><p class="skill-name">Ubuntu</p></div>
+                <div class="cyber-skill-card" data-progress="80"><p class="skill-name">Kali Linux</p></div>
+                <div class="cyber-skill-card" data-progress="80"><p class="skill-name">Windows (7 &amp; 11)</p></div>
+                <div class="cyber-skill-card" data-progress="80"><p class="skill-name">Hardware Fundamentals</p></div>
+                <div class="cyber-skill-card" data-progress="60"><p class="skill-name">Home Servers</p></div>
+            </div>
+
+            <p class="skill-cat-title" data-en="Cybersecurity" data-ar="الأمن السيبراني">Cybersecurity</p>
+            <div class="arsenal-matrix-grid">
+                <div class="cyber-skill-card" data-progress="80"><p class="skill-name">Ethical Hacking</p></div>
+                <div class="cyber-skill-card" data-progress="80"><p class="skill-name">OpenWrt Firmware</p></div>
+            </div>
+
+            <p class="skill-cat-title" data-en="Design &amp; Tools" data-ar="التصميم والأدوات">Design &amp; Tools</p>
+            <div class="arsenal-matrix-grid">
+                <div class="cyber-skill-card" data-progress="60"><p class="skill-name">Canva</p></div>
+                <div class="cyber-skill-card" data-progress="40"><p class="skill-name">Adobe Basics</p></div>
+                <div class="cyber-skill-card" data-progress="40"><p class="skill-name">UI Design</p></div>
+            </div>
+
+            <p class="skill-cat-title" data-en="Languages" data-ar="اللغات">Languages</p>
+            <div class="arsenal-matrix-grid">
+                <div class="cyber-skill-card" data-progress="100"><p class="skill-name" data-en="Arabic" data-ar="العربية">Arabic</p></div>
+                <div class="cyber-skill-card" data-progress="80"><p class="skill-name" data-en="English" data-ar="الإنجليزية">English</p></div>
+                <div class="cyber-skill-card" data-progress="40"><p class="skill-name" data-en="Turkish" data-ar="التركية">Turkish</p></div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ========================================================
+        VIEW: PROJECTS v2
+        Replace img src values with your actual screenshots.
+   ======================================================== -->
+    <section id="view-projects" class="view" aria-labelledby="projects-heading">
+    <div class="container">
+
+        <h2 class="sec-title" id="projects-heading">
+            <span data-en="My" data-ar="">My</span> <span data-en="Projects" data-ar="مشاريعي">Projects</span>
+        </h2>
+        <p class="sec-subtitle" data-en="// real-world builds" data-ar="// مشاريع حقيقية">// real-world builds</p>
+
+        <div class="projects-grid">
+
+            <article class="project-card" data-id="quantum-core" data-github-url="https://github.com/m-mekhlafi/Quantum-Core">
+                <div class="tools">
+                    <div class="circle"><span class="red box"></span></div>
+                    <div class="circle"><span class="yellow box"></span></div>
+                    <div class="circle"><span class="green box"></span></div>
+                </div>
+
+                <div class="project-thumb">
+                    <img src="assets/screenshots/Quantum-core.png" alt="Project Screenshot" class="project-img">
+                </div>
+
+                <div class="project-body">
+                    <div class="project-header">
+                        <h3 class="project-title" data-en="Quantum Core AI" data-ar="مساعد Quantum Core الذكي">Quantum Core AI</h3>
+                        <span class="badge badge-green" data-en="Stable" data-ar="مستقر">Stable</span>
+                    </div>
+                    <p class="project-desc" data-en="A privacy-first Local AI Assistant. Integrates speech-to-text (Whisper), local LLMs (Ollama), and realistic voice synthesis (Kokoro TTS) in a seamless web interface." data-ar="مساعد ذكاء اصطناعي محلي يهتم بالخصوصية. يدمج تقنيات تحويل الصوت لنص (Whisper)، النماذج المحلية (Ollama)، والتركيب الصوتي (Kokoro) في واجهة ويب احترافية.">
+                        A privacy-first Local AI Assistant. Integrates speech-to-text (Whisper), local LLMs (Ollama), and realistic voice synthesis (Kokoro TTS).
+                    </p>
+                    <div class="project-footer">
+                        <a href="javascript:void(0)" class="project-link view-details-btn" data-en="View Project →" data-ar="عرض المشروع →">View Project
+                            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="project-card" data-id="codeshield-ai" data-github-url="https://github.com/m-mekhlafi/CodeShield-AI">
+                <div class="tools">
+                    <div class="circle"><span class="red box"></span></div>
+                    <div class="circle"><span class="yellow box"></span></div>
+                    <div class="circle"><span class="green box"></span></div>
+                </div>
+
+                <div class="project-thumb">
+                    <div class="thumb-placeholder">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.2"><path d="M5 12H2m20 0h-3M12 5V2m0 20v-3"/><circle cx="12" cy="12" r="4"/><path d="M8.5 8.5L6 6m12 12-2.5-2.5M15.5 8.5 18 6M6 18l2.5-2.5"/></svg>
+                        <span style="font-size:0.7rem;color:var(--muted);font-family:var(--font-code),sans-serif">[ screenshot ]</span>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <div class="project-header">
+                        <h3 class="project-title" data-en="CodeShield AI Scanner" data-ar="ماسح CodeShield الأمني">CodeShield AI Scanner</h3>
+                        <span class="badge badge-green" data-en="Stable" data-ar="مستقر">Stable</span>
+                    </div>
+                    <p class="project-desc" data-en="A blazing-fast, 100% local, AI-powered SAST tool built in Rust. Scans code for vulnerabilities using local LLMs with zero cloud data leakage." data-ar="أداة فحص 		أمني (SAST) سريعة جداً ومبنية بلغة Rust، تعمل محلياً بالكامل باستخدام الذكاء الاصطناعي لضمان خصوصية بيانات الكود الخاص بك.">
+                        A blazing-fast, 100% local, AI-powered SAST tool built in Rust. Scans code for vulnerabilities using local LLMs with zero cloud data leakage.
+                    </p>
+                    <div class="project-footer">
+                        <a href="javascript:void(0)" class="project-link view-details-btn" data-en="View Project →" data-ar="عرض المشروع →">View Project
+                            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </article>
+            <article class="project-card" data-id="atm-system-cpp" data-github-url="https://github.com/m-mekhlafi/atm-system-cpp">
+                <div class="tools">
+                    <div class="circle"><span class="red box"></span></div>
+                    <div class="circle"><span class="yellow box"></span></div>
+                    <div class="circle"><span class="green box"></span></div>
+                </div>
+
+                <div class="project-thumb">
+                    <div class="thumb-placeholder">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                            <rect x="2" y="6" width="20" height="12" rx="2" ry="2"/>
+                            <line x1="6" y1="10" x2="6" y2="10"/>
+                            <line x1="10" y1="10" x2="10" y2="10"/>
+                            <line x1="14" y1="10" x2="14" y2="10"/>
+                            <line x1="18" y1="10" x2="18" y2="10"/>
+                            <line x1="6" y1="14" x2="18" y2="14"/>
+                        </svg>
+                        <span style="font-size:0.7rem;color:var(--muted);font-family:var(--font-code),sans-serif">[ cpp-atm ]</span>
+                    </div>
+                </div>
+
+                <div class="project-body">
+                    <div class="project-header">
+                        <h3 class="project-title" data-en="Terminal ATM Simulator" data-ar="محاكي صراف آلي بالتيرمنال">Terminal ATM Simulator</h3>
+                        <span class="badge badge-green" data-en="Stable" data-ar="مستقر">Stable</span>
+                    </div>
+                    <p class="project-desc" data-en="A secure C++ banking application featuring dynamic language switching, user authentication, and secure balance management system." data-ar="تطبيق مصرفي آمن بلغة C++ يتميز بنظام تبديل اللغات الديناميكي، مصادقة المستخدمين، وإدارة الأرصدة.">
+                        A secure C++ banking application featuring dynamic language switching, user authentication, and secure balance management system.
+                    </p>
+                    <div class="project-footer">
+                        <a href="https://github.com/m-mekhlafi/atm-system-cpp/blob/main/README.md" target="_blank" class="project-link" data-en="README →" data-ar="عرض →">README→</a>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+    </section>
+
+    <section id="view-project-details" class="view">
+
+        <div class="mega-terminal-window">
+
+            <div class="terminal-header-bar">
+                <div class="mac-buttons">
+                    <span class="mac-dot red-dot"></span>
+                    <span class="mac-dot yellow-dot"></span>
+                    <span class="mac-dot green-dot"></span>
+                </div>
+                <div class="terminal-window-title"></div>
+            </div>
+
+            <div class="terminal-body-content">
+
+                <div class="details-navigation-row">
+                    <button id="btn-back-projects" class="terminal-back-btn" aria-label="Back">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+                        </svg>
+                        <span data-en="Back" data-ar="العودة"></span>
+                    </button>
+                </div>
+
+                <div class="project-detail-layout">
+
+                    <div id="detail-media" class="project-detail-media"></div>
+
+                    <div class="project-detail-info">
+                        <h2 id="detail-title" class="project-title-heavy"></h2>
+                        <p id="detail-desc" class="project-description-text"></p>
+
+                        <div class="project-actions-row">
+
+                            <a id="detail-github-link" href="#" target="_blank" class="github-action-btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
+                                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/>
+                                </svg>
+                                <span data-en="VIEW IN GIT" data-ar="عرض الكود">VIEW IN GIT</span>
+                            </a>
+
+                            <div class="tooltip-container">
+                                <button class="share-trigger-btn" aria-label="Open Share Menu">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-share-fill" viewBox="0 0 16 16">
+                                        <path d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.5 2.5 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5"/>
+                                    </svg>
+                                    <span style="font-weight: 600;" data-en="SHARE" data-ar="مشاركة">SHARE</span>
+                                </button>
+
+                                <div class="share-dropdown-menu">
+                                    <a id="share-twitter" href="#" target="_blank" class="share-menu-item item-twitter" title="Share on X / Twitter">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-twitter-x" viewBox="0 0 16 16">
+                                            <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.6.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
+                                        </svg>
+                                    </a>
+                                    <a id="share-facebook" href="#" target="_blank" class="share-menu-item item-facebook" title="Share on Facebook">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+                                            <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"/>
+                                        </svg>
+                                    </a>
+                                    <button id="share-copy" class="share-menu-item item-copy" title="Copy Link">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link" viewBox="0 0 24 24">
+                                            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                                            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                                        </svg>
+                                    </button>
+                                    <span class="tooltip9"></span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ========================================================
+           VIEW: contact
+      ======================================================== -->
+    <section id="view-contact" class="view" aria-labelledby="contact-heading">
+        <div class="container">
+            <h2 class="sec-title" id="contact-heading">
+                <span data-en="Contact" data-ar="تواصل">Contact</span> <span data-en="Me" data-ar="معي">Me</span>
+            </h2>
+            <p class="sec-subtitle" data-en="// let's collaborate securely" data-ar="// دعنا نتعاون بأمان">// let's collaborate securely</p>
+
+            <div class="contact-wrapper">
+                <!-- نموذج تواصل بتصميم حديث -->
+                <form id="contact-form" class="cyber-form">
+                    <div id="form-status" class="form-status-message" style="display: none;"></div>
+                    <div class="cyber-field-wrapper">
+                    <div class="corner-scanners"><span></span><span></span><span></span><span></span></div>
+                    <div class="cyber-input-container">
+                        <input type="email" name="email" id="matrix-email" placeholder=" " required autocomplete="off">
+                        <label for="matrix-email">
+                            <span class="glitch-text" data-text="[ EMAIL ]">[ EMAIL]</span>
+                            <span class="sub-label" data-en="Enter your Email" data-ar=" "></span>
+                        </label>
+                        <div class="scan-line"></div>
+                    </div>
+                    <div class="field-status-bar"><span class="status-node"></span> READY_FOR_INPUT</div>
+                </div>
+
+                <div class="cyber-field-wrapper">
+                    <div class="corner-scanners"><span></span><span></span><span></span><span></span></div>
+                    <div class="cyber-input-container">
+                        <textarea name="message" id="matrix-message" rows="5" placeholder="Type Your Message" required></textarea>
+                        <label for="matrix-message">
+                            <span class="glitch-text" data-text="[ TRANSMISSION_DATA_ ]">[ Content ]</span>
+                            <span class="sub-label" data-en="Message" data-ar="محتوى الرسالة"></span>
+                        </label>
+                        <div class="scan-line"></div>
+                    </div>
+                    <div class="field-status-bar"><span class="status-node"></span> ENCRYPTION_ACTIVE</div>
+                </div>
+
+                <button type="submit" class="quantum-transmit-btn">
+                    <div class="btn-matrix-bg"></div>
+                    <div class="btn-border-glow"></div>
+                    <div class="btn-content">
+                        <div class="rocket-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22">
+                                <path fill="none" d="M0 0h24v24H0z"></path>
+                                <path fill="currentColor" d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"></path>
+                            </svg>
+                        </div>
+                        <span class="btn-text" data-en="SEND" data-ar="إطلاق البيانات المشفرة">SEND</span>
+                    </div>
+                </button>
+            </form>
+
+                <div class="social-links-grid">
+                    <a href="https://github.com/m-mekhlafi" target="_blank" rel="noopener noreferrer" class="social-btn github-btn">
+                        <div class="svg-wrapper-1">
+                            <div class="svg-wrapper">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18">
+                                    <path fill="currentColor" d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <span class="social-text">GitHub</span>
+                    </a>
+
+                    <a href="https://linkedin.com/in/mohammed-al-mekhlafi-988661406/" target="_blank" rel="noopener noreferrer" class="social-btn linkedin-btn">
+                        <div class="svg-wrapper-1">
+                            <div class="svg-wrapper">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18">
+                                    <path fill="currentColor" d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <span class="social-text">LinkedIn</span>
+                    </a>
+
+                    <a href="https://t.me/ql_xd" target="_blank" rel="noopener noreferrer" class="social-btn telegram-fly-btn">
+                        <div class="svg-wrapper-1">
+                            <div class="svg-wrapper">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18">
+                                    <path fill="none" d="M0 0h24v24H0z"></path>
+                                    <path fill="currentColor" d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <span class="social-text">Telegram</span>
+                    </a>
+
+                    <a href="https://tryhackme.com/p/" target="_blank" rel="noopener noreferrer" class="social-btn thm-btn">
+                        <div class="svg-wrapper-1">
+                            <div class="svg-wrapper">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18">
+                                    <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <span class="social-text">TryHackMe</span>
+                    </a>
+
+                    <a href="mailto:mohammedemad8lxd@gmail.com" class="social-btn email-btn alert-btn">
+                        <div class="svg-wrapper-1">
+                            <div class="svg-wrapper">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18">
+                                    <path fill="none" d="M0 0h24v24H0z"></path>
+                                    <path fill="currentColor" d="M3 3h18a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm17 4.238l-7.928 6.166L4 7.216V19h16V7.238zM4.511 5l7.461 5.803L19.451 5H4.511z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <span class="social-text">Direct Email</span>
+                    </a>
+                </div>
+                </div>
+            </div>
+    </section>
+</main>
+<script src="script.js"></script>
+
+</body>
+</html>
