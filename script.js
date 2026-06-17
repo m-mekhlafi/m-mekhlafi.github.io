@@ -373,6 +373,64 @@ function initFormspreeAjax() {
 
     if (!form || !status || !submitBtn || !btnText) return;
 
+    // متغير لتخزين وقت آخر إرسال (خارج المستمع لمنع التكرار)
+    let lastSubmit = 0;
+
+    form.addEventListener('submit', async function(event) {
+        event.preventDefault();
+
+        // 🛡️ صمام أمان: منع الإرسال المتكرر إذا لم تمر 10 ثوانٍ
+        if (Date.now() - lastSubmit < 10000) {
+            status.style.display = "block";
+            status.className = "form-status-message error-status";
+            status.innerHTML = currentLang === 'ar'
+                ? "[-] يرجى الانتظار قبل محاولة الإرسال مجدداً."
+                : "[-] Rate limit hit: Please wait before transmitting again.";
+            return;
+        }
+
+        const formData = new FormData(form);
+        const originalBtnText = btnText.innerHTML;
+
+        // تحديث حالة الزر
+        btnText.innerHTML = currentLang === 'ar' ? 'جاري التشفير...' : 'Encrypting...';
+        submitBtn.disabled = true;
+
+        try {
+            const response = await fetch('https://formspree.io/f/maqzqoyp', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            status.style.display = "block";
+
+            if (response.ok) {
+                // تحديث وقت الإرسال الناجح فقط لمنع حظر المستخدم العشوائي
+                lastSubmit = Date.now();
+
+                status.className = "form-status-message success-status";
+                status.innerHTML = currentLang === 'ar'
+                    ? "[+] تم الإرسال بنجاح: البيانات مشفرة وآمنة."
+                    : "[+] Transmission Successful: Data Encrypted & Sent.";
+                form.reset();
+            } else {
+                throw new Error('Server Error');
+            }
+        } catch (error) {
+            status.style.displa/* ----------------------------------------------------------
+   8. SECURE AJAX MAIL TRANSMISSION (Stealth Formspree)
+---------------------------------------------------------- */
+function initFormspreeAjax() {
+    const form = document.getElementById('contact-form');
+    const status = document.getElementById('form-status');
+    const submitBtn = form?.querySelector('.quantum-transmit-btn');
+    const btnText = submitBtn?.querySelector('.btn-text');
+
+    if (!form || !status || !submitBtn || !btnText) return;
+
     form.addEventListener('submit', async function(event) {
         event.preventDefault();
 
@@ -424,6 +482,21 @@ function initFormspreeAjax() {
             lastSubmit = Date.now();
             // ... باقي الكود
         });
+    });
+}y = "block";
+            status.className = "form-status-message error-status";
+            status.innerHTML = currentLang === 'ar'
+                ? "[-] خطأ: فشل تشفير الاتصال الحركي."
+                : "[-] Connection Error: Quantum link handshake failed.";
+        } finally {
+            btnText.innerHTML = originalBtnText;
+            submitBtn.disabled = false;
+
+            // إخفاء الرسالة تلقائياً بعد 5 ثوانٍ
+            setTimeout(() => {
+                status.style.display = "none";
+            }, 5000);
+        }
     });
 }
 
