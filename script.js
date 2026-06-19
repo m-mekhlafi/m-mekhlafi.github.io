@@ -420,88 +420,86 @@ function initFormspreeAjax() {
                 throw new Error('Server Error');
             }
         } catch (error) {
-            status.style.displa
-  /* ----------------------------------------------------------
+            status.style.displa/* ----------------------------------------------------------
    8. SECURE AJAX MAIL TRANSMISSION (Stealth Formspree)
 ---------------------------------------------------------- */
-            function initFormspreeAjax() {
-                const form = document.getElementById('contact-form');
-                const status = document.getElementById('form-status');
-                const submitBtn = form?.querySelector('.quantum-transmit-btn');
-                const btnText = submitBtn?.querySelector('.btn-text');
+function initFormspreeAjax() {
+    const form = document.getElementById('contact-form');
+    const status = document.getElementById('form-status');
+    const submitBtn = form?.querySelector('.quantum-transmit-btn');
+    const btnText = submitBtn?.querySelector('.btn-text');
 
-                if (!form || !status || !submitBtn || !btnText) return;
+    if (!form || !status || !submitBtn || !btnText) return;
 
-                // We define lastSubmit outside the event listener so it tracks time correctly
-                let lastSubmit = 0;
+    form.addEventListener('submit', async function(event) {
+        event.preventDefault();
 
-                form.addEventListener('submit', async function(event) {
-                    event.preventDefault();
+        const formData = new FormData(form);
+        const originalBtnText = btnText.innerHTML;
 
-                    // Rate Limiter: Prevent spamming the button
-                    if (Date.now() - lastSubmit < 10000) {
-                        status.style.display = "block";
-                        status.className = "form-status-message error-status";
-                        status.innerHTML = currentLang === 'ar'
-                            ? "[-] يرجى الانتظار 10 ثوانٍ قبل الإرسال مجدداً."
-                            : "[-] Rate limit hit: Wait 10 seconds before transmitting.";
+        btnText.innerHTML = currentLang === 'ar' ? 'جاري التشفير...' : 'Encrypting...';
+        submitBtn.disabled = true;
 
-                        setTimeout(() => { status.style.display = "none"; }, 5000);
-                        return;
-                    }
+        try {
+            const response = await fetch('https://formspree.io/f/maqzqoyp', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
 
-                    const formData = new FormData(form);
-                    const originalBtnText = btnText.innerHTML;
+            status.style.display = "block";
 
-                    // UI Update: Show loading state
-                    btnText.innerHTML = currentLang === 'ar' ? 'جاري التشفير...' : 'Encrypting...';
-                    submitBtn.disabled = true;
-
-                    try {
-                        // Your correct Formspree Endpoint
-                        const response = await fetch('https://formspree.io/f/maqzqoyp', {
-                            method: 'POST',
-                            body: formData,
-                            headers: {
-                                'Accept': 'application/json'
-                            }
-                        });
-
-                        status.style.display = "block";
-
-                        if (response.ok) {
-                            // Only update the timer if the transmission was actually successful
-                            lastSubmit = Date.now();
-
-                            status.className = "form-status-message success-status";
-                            status.innerHTML = currentLang === 'ar'
-                                ? "[+] تم الإرسال بنجاح: البيانات مشفرة وآمنة."
-                                : "[+] Transmission Successful: Data Encrypted & Sent.";
-                            form.reset(); // Clear the form
-                        } else {
-                            // If Formspree rejects it (e.g., bad data), throw an error
-                            throw new Error('Server Error');
-                        }
-                    } catch (error) {
-                        // This runs if fetch fails (e.g., no internet, blocked by adblock, or server error)
-                        status.style.display = "block";
-                        status.className = "form-status-message error-status";
-                        status.innerHTML = currentLang === 'ar'
-                            ? "[-] خطأ: فشل تشفير الاتصال الحركي."
-                            : "[-] Connection Error: Quantum link handshake failed.";
-                        console.error("Formspree Error:", error); // Log the actual error to the console for debugging
-                    } finally {
-                        // Restore button state regardless of success or failure
-                        btnText.innerHTML = originalBtnText;
-                        submitBtn.disabled = false;
-
-                        // Hide the status message after 5 seconds
-                        setTimeout(() => {
-                            status.style.display = "none";
-                        }, 5000);
-                    }
-                });
+            if (response.ok) {
+                status.className = "form-status-message success-status";
+                status.innerHTML = currentLang === 'ar'
+                    ? "[+] تم الإرسال بنجاح: البيانات مشفرة وآمنة."
+                    : "[+] Transmission Successful: Data Encrypted & Sent.";
+                form.reset();
+            } else {
+                throw new Error('Server Error');
             }
+        } catch (error) {
+            status.style.display = "block";
+            status.className = "form-status-message error-status";
+            status.innerHTML = currentLang === 'ar'
+                ? "[-] خطأ: فشل تشفير الاتصال الحركي."
+                : "[-] Connection Error: Quantum link handshake failed.";
+        } finally {
+            btnText.innerHTML = originalBtnText;
+            submitBtn.disabled = false;
+
+            setTimeout(() => {
+                status.style.display = "none";
+            }, 5000);
+        }
+
+        // منع الإرسال المتكرر
+        let lastSubmit = 0;
+        form.addEventListener('submit', async function(event) {
+            if (Date.now() - lastSubmit < 10000) return; // 10 ثوان
+            lastSubmit = Date.now();
+            // ... باقي الكود
+        });
+    });
+}y = "block";
+            status.className = "form-status-message error-status";
+            status.innerHTML = currentLang === 'ar'
+                ? "[-] خطأ: فشل تشفير الاتصال الحركي."
+                : "[-] Connection Error: Quantum link handshake failed.";
+        } finally {
+            btnText.innerHTML = originalBtnText;
+            submitBtn.disabled = false;
+
+            // إخفاء الرسالة تلقائياً بعد 5 ثوانٍ
+            setTimeout(() => {
+                status.style.display = "none";
+            }, 5000);
+        }
+    });
+}
+
 /* ----------------------------------------------------------
    9. MAIN INITIALIZATION (On DOM Load)
 ---------------------------------------------------------- */
