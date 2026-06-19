@@ -1,9 +1,9 @@
 /* ==========================================================================
-   PORTFOLIO ARCHITECTURE - SECURE, STABLE & OPTIMIZED JS (FINAL)
+   PORTFOLIO ARCHITECTURE - SECURE, STABLE & OPTIMIZED JS
    ========================================================================== */
 
 /* ----------------------------------------------------------
-   1. SPA NAVIGATION (Single Page Application Router)
+   1. SPA NAVIGATION
 ---------------------------------------------------------- */
 function showView(targetId) {
     const views = document.querySelectorAll('.view');
@@ -20,11 +20,7 @@ function showView(targetId) {
         hero.classList.add('compact');
         views.forEach(v => {
             if (v.id !== 'view-hero') {
-                if (v.id === targetId) {
-                    v.classList.add('active-view');
-                } else {
-                    v.classList.remove('active-view');
-                }
+                v.classList.toggle('active-view', v.id === targetId);
             }
         });
     }
@@ -40,11 +36,8 @@ function showView(targetId) {
    2. MOBILE HAMBURGER MENU
 ---------------------------------------------------------- */
 function closeMobileMenu() {
-    const navLinks = document.getElementById('navLinks');
-    const hamburger = document.getElementById('hamburger');
-
-    navLinks?.classList.remove('open');
-    hamburger?.setAttribute('aria-expanded', 'false');
+    document.getElementById('navLinks')?.classList.remove('open');
+    document.getElementById('hamburger')?.setAttribute('aria-expanded', 'false');
 }
 
 function initHamburger() {
@@ -68,22 +61,22 @@ function initHamburger() {
 ---------------------------------------------------------- */
 function initCyberSkills() {
     document.querySelectorAll('.cyber-skill-card').forEach(card => {
-        const progress = parseInt(card.getAttribute('data-progress'), 10) || 0;
-        const skillNameEl = card.querySelector('.skill-name');
+        const progress     = parseInt(card.getAttribute('data-progress'), 10) || 0;
+        const skillNameEl  = card.querySelector('.skill-name');
         const skillNameHTML = skillNameEl ? skillNameEl.outerHTML : '';
+        const activeStars  = Math.round(progress / 20);
 
-        const activeStars = Math.round(progress / 20);
         let starsHTML = '<div class="cyber-stars-rating">';
-        for(let i = 0; i < 5; i++) {
+        for (let i = 0; i < 5; i++) {
             starsHTML += `<span class="star-node ${i < activeStars ? 'active' : ''}"></span>`;
         }
         starsHTML += '</div>';
 
-        let status = "GATHERING_DATA";
-        if (progress === 100) status = "MAXIMUM_CAPACITY";
-        else if (progress >= 80) status = "ADVANCED_STABLE";
-        else if (progress >= 60) status = "SECURE_OPERATIONAL";
-        else if (progress >= 40) status = "INITIALIZING...";
+        let status = 'GATHERING_DATA';
+        if      (progress === 100) status = 'MAXIMUM_CAPACITY';
+        else if (progress >= 80)   status = 'ADVANCED_STABLE';
+        else if (progress >= 60)   status = 'SECURE_OPERATIONAL';
+        else if (progress >= 40)   status = 'INITIALIZING...';
 
         card.innerHTML = `
             <div class="card-glitch-overlay"></div>
@@ -102,19 +95,19 @@ function initCyberSkills() {
         `;
 
         setTimeout(() => {
-            const fillBar = card.querySelector('.progress-energy-fill');
-            if (fillBar) fillBar.style.width = `${progress}%`;
+            const fill = card.querySelector('.progress-energy-fill');
+            if (fill) fill.style.width = `${progress}%`;
         }, 100);
     });
 }
 
 /* ----------------------------------------------------------
-   4. ADVANCED LANGUAGE SWITCHER
+   4. LANGUAGE SWITCHER
 ---------------------------------------------------------- */
 const LANG_CONFIG = {
-    en: { dir: 'ltr', label: 'English', bodyClass: '' },
-    ar: { dir: 'rtl', label: 'عربي', bodyClass: 'lang-ar' },
-    tr: { dir: 'ltr', label: 'Türkçe', bodyClass: '' }
+    en: { dir: 'ltr', label: 'English',  bodyClass: '' },
+    ar: { dir: 'rtl', label: 'عربي',     bodyClass: 'lang-ar' },
+    tr: { dir: 'ltr', label: 'Türkçe',   bodyClass: '' }
 };
 
 let currentLang = 'en';
@@ -122,13 +115,13 @@ let currentLang = 'en';
 function switchLanguage(targetLang) {
     if (!LANG_CONFIG[targetLang]) return;
 
-    const html = document.documentElement;
-    const body = document.body;
+    const html   = document.documentElement;
+    const body   = document.body;
     const config = LANG_CONFIG[targetLang];
 
-    html.setAttribute('lang', targetLang);
+    html.setAttribute('lang',      targetLang);
     html.setAttribute('data-lang', targetLang);
-    html.setAttribute('dir', config.dir);
+    html.setAttribute('dir',       config.dir);
 
     body.classList.remove('lang-ar');
     if (config.bodyClass) body.classList.add(config.bodyClass);
@@ -136,41 +129,36 @@ function switchLanguage(targetLang) {
     const currentLangText = document.getElementById('currentLangText');
     if (currentLangText) currentLangText.textContent = config.label;
 
-    const translatables = document.querySelectorAll('[data-en], [data-ar]');
-    translatables.forEach(el => {
+    document.querySelectorAll('[data-en], [data-ar]').forEach(el => {
         let text = el.getAttribute(`data-${targetLang}`);
-        if (!text && targetLang === 'tr') {
-            text = el.getAttribute('data-en');
-        }
-        if (text !== null) {
-            el.innerHTML = text; // في switchLanguage
-        }
+        if (!text && targetLang === 'tr') text = el.getAttribute('data-en');
+        if (text !== null) el.innerHTML = text;
     });
 
     currentLang = targetLang;
 
-    // تحديث نصوص نافذة تفاصيل المشروع النشطة حالياً إذا كانت مفتوحة لضمان تزامن اللغات
+    // تحديث نافذة تفاصيل المشروع إن كانت مفتوحة
     const detailTitle = document.getElementById('detail-title');
-    const detailDesc = document.getElementById('detail-desc');
-    if (detailTitle && detailTitle.getAttribute(`data-${targetLang}`)) {
+    const detailDesc  = document.getElementById('detail-desc');
+    if (detailTitle?.getAttribute(`data-${targetLang}`)) {
         detailTitle.innerText = detailTitle.getAttribute(`data-${targetLang}`);
     }
-    if (detailDesc && detailDesc.getAttribute(`data-${targetLang}`)) {
+    if (detailDesc?.getAttribute(`data-${targetLang}`)) {
         detailDesc.innerText = detailDesc.getAttribute(`data-${targetLang}`);
     }
 }
 
 function initLangDropdown() {
-    const langBtn = document.getElementById('langToggleBtn');
-    const langMenu = document.getElementById('langMenu');
+    const langBtn     = document.getElementById('langToggleBtn');
+    const langMenu    = document.getElementById('langMenu');
     const langOptions = document.querySelectorAll('.lang-option');
 
     if (!langBtn || !langMenu) return;
 
-    langBtn.addEventListener('click', (e) => {
+    langBtn.addEventListener('click', e => {
         e.stopPropagation();
-        langMenu.classList.toggle('show');
-        langBtn.setAttribute('aria-expanded', langMenu.classList.contains('show'));
+        const isOpen = langMenu.classList.toggle('show');
+        langBtn.setAttribute('aria-expanded', String(isOpen));
     });
 
     document.addEventListener('click', () => {
@@ -179,10 +167,10 @@ function initLangDropdown() {
     });
 
     langOptions.forEach(option => {
-        option.addEventListener('click', (e) => {
-            const selectedLang = e.target.getAttribute('data-lang-val');
-            if (selectedLang) {
-                switchLanguage(selectedLang);
+        option.addEventListener('click', e => {
+            const lang = e.target.getAttribute('data-lang-val');
+            if (lang) {
+                switchLanguage(lang);
                 langMenu.classList.remove('show');
             }
         });
@@ -202,13 +190,14 @@ function initCtaButtons() {
 }
 
 /* ----------------------------------------------------------
-   6. THEME TOGGLE (True Light / Dark Mode)
+   6. THEME TOGGLE
 ---------------------------------------------------------- */
 function initThemeToggle() {
     const themeInput = document.getElementById('theme-input');
     if (!themeInput) return;
 
     const savedTheme = localStorage.getItem('theme');
+
     if (savedTheme === 'light') {
         document.documentElement.classList.add('light-mode');
         themeInput.checked = false;
@@ -229,206 +218,180 @@ function initThemeToggle() {
 }
 
 /* ----------------------------------------------------------
-7. PROJECT DETAILS MODAL / VIEW (UPGRADED & SECURE)
-----------------------------------------------------------*/
+   7. PROJECT DETAILS MODAL
+---------------------------------------------------------- */
 function initProjectDetails() {
-    // الرابط الافتراضي لحسابك في حال نسيان إضافة رابط المستودع لأي مشروع
     const DEFAULT_GITHUB = 'https://github.com/m-mekhlafi';
 
     document.querySelectorAll('.project-card').forEach(card => {
         card.style.cursor = 'pointer';
 
-        card.addEventListener('click', (e) => {
-            // [حماية هندسية]: منع فتح النافذة إذا ضغط المستخدم على رابط فعلي (مثل زر عرض الـ README) داخل الكرت
-            if (e.target.closest('a') && !e.target.closest('a').classList.contains('view-details-btn')) {
-                return;
-            }
+        card.addEventListener('click', e => {
+            if (e.target.closest('a') && !e.target.closest('a').classList.contains('view-details-btn')) return;
 
-            // 1. استخراج العناصر الأساسية
-            const titleEl = card.querySelector('.project-title');
-            const descEl = card.querySelector('.project-desc');
-            const thumbHtml = card.querySelector('.project-thumb, .thumb-placeholder')?.innerHTML || '';
+            const titleEl    = card.querySelector('.project-title');
+            const descEl     = card.querySelector('.project-desc');
+            const thumbHtml  = card.querySelector('.project-thumb, .thumb-placeholder')?.innerHTML || '';
 
             if (!titleEl || !descEl) return;
 
-            // 2. استخراج المعرفات والروابط (يدعم data-id و data-project)
-            const projectId = card.getAttribute('data-id') || card.getAttribute('data-project') || 'unknown-project';
-            const githubUrl = card.getAttribute('data-github-url') || DEFAULT_GITHUB;
+            const projectId  = card.getAttribute('data-id') || card.getAttribute('data-project') || 'unknown-project';
+            const githubUrl  = card.getAttribute('data-github-url') || DEFAULT_GITHUB;
 
-            // 3. استخراج النصوص المترجمة
             const titleEn = titleEl.getAttribute('data-en') || titleEl.innerText;
             const titleAr = titleEl.getAttribute('data-ar') || titleEl.innerText;
-            const descEn = descEl.getAttribute('data-en') || descEl.innerText;
-            const descAr = descEl.getAttribute('data-ar') || descEl.innerText;
+            const descEn  = descEl.getAttribute('data-en')  || descEl.innerText;
+            const descAr  = descEl.getAttribute('data-ar')  || descEl.innerText;
 
-            // 4. استهداف عناصر النافذة الكبرى (Modal)
-            const detailTitle = document.getElementById('detail-title');
-            const detailDesc = document.getElementById('detail-desc');
-            const detailMedia = document.getElementById('detail-media');
+            const detailTitle  = document.getElementById('detail-title');
+            const detailDesc   = document.getElementById('detail-desc');
+            const detailMedia  = document.getElementById('detail-media');
             const detailGithub = document.getElementById('detail-github-link');
 
-            // 5. حقن البيانات في النافذة
-            if (detailTitle) {
-                detailTitle.setAttribute('data-en', titleEn);
-                detailTitle.setAttribute('data-ar', titleAr);
-                detailTitle.innerText = currentLang === 'ar' ? titleAr : titleEn;
-            }
-
-            if (detailDesc) {
-                detailDesc.setAttribute('data-en', descEn);
-                detailDesc.setAttribute('data-ar', descAr);
-                detailDesc.innerText = currentLang === 'ar' ? descAr : descEn;
-            }
-
-            if (detailMedia) {
-                detailMedia.innerHTML = thumbHtml.trim() ? thumbHtml : '';
-            }
-
-            if (detailGithub) {
-                // هنا يتم تحديث رابط زر الجيتهاب ديناميكياً بناءً على الكرت المضغوط
-                detailGithub.setAttribute('href', githubUrl);
-            }
-            // أضف هذا التحقق لضمان عدم حدوث خطأ إذا لم يتم العثور على أي عنصر
             if (!detailTitle || !detailDesc || !detailMedia || !detailGithub) {
-                console.warn("[-] Project Detail elements not found in DOM.");
+                console.warn('[-] Project Detail elements not found in DOM.');
                 return;
             }
 
-            // 6. نظام المشاركة الديناميكي (Dynamic Sharing System)
-            const fullTargetUrl = `${window.location.origin}${window.location.pathname}?viewProject=${encodeURIComponent(projectId)}`;
+            detailTitle.setAttribute('data-en', titleEn);
+            detailTitle.setAttribute('data-ar', titleAr);
+            detailTitle.innerText = currentLang === 'ar' ? titleAr : titleEn;
+
+            detailDesc.setAttribute('data-en', descEn);
+            detailDesc.setAttribute('data-ar', descAr);
+            detailDesc.innerText = currentLang === 'ar' ? descAr : descEn;
+
+            detailMedia.innerHTML = thumbHtml.trim() ? thumbHtml : '';
+            detailGithub.setAttribute('href', githubUrl);
+
+            // Dynamic Share Links
+            const fullUrl   = `${window.location.origin}${window.location.pathname}?viewProject=${encodeURIComponent(projectId)}`;
             const shareText = currentLang === 'ar'
                 ? `إليك مشروعي البرمجي الاحترافي: ${titleAr}`
                 : `Check out my software project: ${titleEn}`;
 
-            // دالة مساعدة لتقليل تكرار الكود وتسريع التنفيذ
             const setShareLink = (id, url) => {
                 const el = document.getElementById(id);
                 if (el) el.setAttribute('href', url);
             };
 
-            setShareLink('share-twitter', `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(fullTargetUrl)}`);
-            setShareLink('share-facebook', `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(fullTargetUrl)}`);
-            setShareLink('share-whatsapp', `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText + ' ' + fullTargetUrl)}`);
-            setShareLink('share-reddit', `https://www.reddit.com/submit?url=${encodeURIComponent(fullTargetUrl)}&title=${encodeURIComponent(shareText)}`);
+            setShareLink('share-twitter',  `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(fullUrl)}`);
+            setShareLink('share-facebook', `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(fullUrl)}`);
+            setShareLink('share-whatsapp', `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText + ' ' + fullUrl)}`);
+            setShareLink('share-reddit',   `https://www.reddit.com/submit?url=${encodeURIComponent(fullUrl)}&title=${encodeURIComponent(shareText)}`);
 
-            // 7. نظام النسخ الآمن للحافظة (Secure Clipboard Copy)
+            // Clipboard Copy — clone to remove stale listeners
             const copyBtn = document.getElementById('share-copy');
             if (copyBtn) {
-                // استنساخ الزر لمسح أي مستمعات أحداث (Event Listeners) قديمة لمنع التكرار
                 const newCopyBtn = copyBtn.cloneNode(true);
                 copyBtn.parentNode.replaceChild(newCopyBtn, copyBtn);
 
-                newCopyBtn.addEventListener('click', (e) => {
+                newCopyBtn.addEventListener('click', e => {
                     e.preventDefault();
-                    navigator.clipboard.writeText(fullTargetUrl).then(() => {
-                        newCopyBtn.style.color = 'var(--green)';
-                        newCopyBtn.style.borderColor = 'var(--green)';
-
+                    navigator.clipboard.writeText(fullUrl).then(() => {
+                        newCopyBtn.style.color        = 'var(--green)';
+                        newCopyBtn.style.borderColor  = 'var(--green)';
                         setTimeout(() => {
-                            newCopyBtn.style.color = '';
+                            newCopyBtn.style.color       = '';
                             newCopyBtn.style.borderColor = '';
                         }, 1500);
                     }).catch(err => {
-                        console.error('[-] Security Alert: Clipboard access denied or failed.', err);
+                        console.error('[-] Clipboard access denied.', err);
                     });
                 });
             }
 
-            // 8. إظهار النافذة بعد اكتمال التحضير
             showView('view-project-details');
         });
     });
 }
+
 /* ----------------------------------------------------------
-   7.2 AUTOMATIC DEEP-LINK ROUTER (Cybersecurity Hardened)
+   7.2 DEEP-LINK ROUTER
 ---------------------------------------------------------- */
 function checkIncomingSharedLinks() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const sharedProjectId = urlParams.get('viewProject');
+    const params          = new URLSearchParams(window.location.search);
+    const sharedProjectId = params.get('viewProject');
 
-    if (sharedProjectId) {
-        try {
-            // تطهير المدخلات لمنع الرموز الخبيثة من كسر محرك استعلامات المتصفح
-            const sanitizedId = CSS.escape(sharedProjectId);
-            const targetCard = document.querySelector(`.project-card[data-id="${sanitizedId}"]`);
-            if (targetCard) {
-                setTimeout(() => {
-                    targetCard.click();
-                }, 300);
-            }
-        } catch (error) {
-            console.error("[-] Cybersecurity Alert: Malformed selector injection blocked.");
-        }
+    if (!sharedProjectId) return;
+
+    try {
+        const sanitizedId = CSS.escape(sharedProjectId);
+        const targetCard  = document.querySelector(`.project-card[data-id="${sanitizedId}"]`);
+        if (targetCard) setTimeout(() => targetCard.click(), 300);
+    } catch (err) {
+        console.error('[-] Malformed selector injection blocked.');
     }
 }
 
-            /* ----------------------------------------------------------
-   8. SECURE AJAX MAIL TRANSMISSION (Stealth Formspree)
+/* ----------------------------------------------------------
+   8. AJAX CONTACT FORM (Formspree)
 ---------------------------------------------------------- */
 function initFormspreeAjax() {
-    const form = document.getElementById('contact-form');
-    const status = document.getElementById('form-status');
+    const form      = document.getElementById('contact-form');
+    const status    = document.getElementById('form-status');
     const submitBtn = form?.querySelector('.quantum-transmit-btn');
-    const btnText = submitBtn?.querySelector('.btn-text');
+    const btnText   = submitBtn?.querySelector('.btn-text');
 
     if (!form || !status || !submitBtn || !btnText) return;
 
-    let lastSubmit = 0; // ✅ خارج الـ Listener
+    let lastSubmit = 0;
 
-    form.addEventListener('submit', async function(event) {
-        event.preventDefault();
+    form.addEventListener('submit', async e => {
+        e.preventDefault();
 
-        if (Date.now() - lastSubmit < 10000) {
-            status.style.display = "block";
-            status.className = "form-status-message error-status";
-            status.innerHTML = currentLang === 'ar'
-                ? "[-] يرجى الانتظار قبل محاولة الإرسال مجدداً."
-                : "[-] Rate limit: Please wait before transmitting again.";
+        // Rate limit: 10 seconds between submissions
+        if (Date.now() - lastSubmit < 10_000) {
+            status.style.display = 'block';
+            status.className     = 'form-status-message error-status';
+            status.innerHTML     = currentLang === 'ar'
+                ? '[-] يرجى الانتظار قبل محاولة الإرسال مجدداً.'
+                : '[-] Rate limit: Please wait before transmitting again.';
             return;
         }
 
-        const formData = new FormData(form);
-        const originalBtnText = btnText.innerHTML;
+        const formData       = new FormData(form);
+        const originalBtnTxt = btnText.innerHTML;
 
-        btnText.innerHTML = currentLang === 'ar' ? 'جاري التشفير...' : 'Encrypting...';
+        btnText.innerHTML  = currentLang === 'ar' ? 'جاري التشفير...' : 'Encrypting...';
         submitBtn.disabled = true;
 
         try {
             const response = await fetch('https://formspree.io/f/maqzqoyp', {
-                method: 'POST',
-                body: formData,
+                method:  'POST',
+                body:    formData,
                 headers: { 'Accept': 'application/json' }
             });
 
-            status.style.display = "block"; // ✅ مكتوبة بشكل صحيح
+            status.style.display = 'block';
 
             if (response.ok) {
-                lastSubmit = Date.now();
-                status.className = "form-status-message success-status";
+                lastSubmit       = Date.now();
+                status.className = 'form-status-message success-status';
                 status.innerHTML = currentLang === 'ar'
-                    ? "[+] تم الإرسال بنجاح: البيانات مشفرة وآمنة."
-                    : "[+] Transmission Successful: Data Encrypted & Sent.";
+                    ? '[+] تم الإرسال بنجاح: البيانات مشفرة وآمنة.'
+                    : '[+] Transmission Successful: Data Encrypted & Sent.';
                 form.reset();
             } else {
                 throw new Error('Server Error');
             }
-        } catch (error) {
-            status.style.display = "block"; // ✅ مكتوبة بشكل صحيح
-            status.className = "form-status-message error-status";
-            status.innerHTML = currentLang === 'ar'
-                ? "[-] خطأ: فشل تشفير الاتصال."
-                : "[-] Connection Error: Quantum link handshake failed.";
+
+        } catch (err) {
+            status.style.display = 'block';
+            status.className     = 'form-status-message error-status';
+            status.innerHTML     = currentLang === 'ar'
+                ? '[-] خطأ: فشل تشفير الاتصال.'
+                : '[-] Connection Error: Quantum link handshake failed.';
         } finally {
-            btnText.innerHTML = originalBtnText;
+            btnText.innerHTML  = originalBtnTxt;
             submitBtn.disabled = false;
-            setTimeout(() => {
-                status.style.display = "none";
-            }, 5000);
+            setTimeout(() => { status.style.display = 'none'; }, 5000);
         }
     });
 }
+
 /* ----------------------------------------------------------
-   9. MAIN INITIALIZATION (On DOM Load)
+   9. MAIN INITIALIZATION
 ---------------------------------------------------------- */
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -443,7 +406,6 @@ document.addEventListener('DOMContentLoaded', () => {
         showView('view-projects');
     });
 
-    // تشغيل المكونات باستقرار كامل وبترتيب منطقي آمن
     initCtaButtons();
     initCyberSkills();
     initHamburger();
@@ -451,35 +413,20 @@ document.addEventListener('DOMContentLoaded', () => {
     initProjectDetails();
     initThemeToggle();
     initFormspreeAjax();
-
     checkIncomingSharedLinks();
-
     showView('view-hero');
 });
-const atmLangs = {
-    en: { header: "AL-MEKHLAFI ATM", dep: "Deposit", with: "Withdraw", success: "Success!" },
-    ar: { header: "صراف المخلافي الآلي", dep: "إيداع", with: "سحب", success: "تمت العملية!" }
-};
 
-// وبدلاً من مصفوفات الـ C++ (Names/Pins)، سنستخدم مصفوفة كائنات (Array of Objects) في JS:
-let users = [
-    { name: "Mohammed", pin: 1234, balance: 500 }
-];
 /* ----------------------------------------------------------
-   10. CYBER PRELOADER LOGIC
+   10. CYBER PRELOADER
 ---------------------------------------------------------- */
-// نستخدم window.addEventListener('load') بدلاً من DOMContentLoaded
-// لأنه يضمن تحميل كل الصور والمحتوى قبل إخفاء الشاشة
 window.addEventListener('load', () => {
     const preloader = document.getElementById('cyber-preloader');
-    if (preloader) {
-        // تأخير ناعم لمدة ثانية ونصف لإظهار واجهة التحميل السبرانية
-        setTimeout(() => {
-            preloader.style.opacity = '0';
-            preloader.style.visibility = 'hidden';
-            setTimeout(() => {
-                preloader.style.display = 'none';
-            }, 500);
-        }, 1500);
-    }
+    if (!preloader) return;
+
+    setTimeout(() => {
+        preloader.style.opacity    = '0';
+        preloader.style.visibility = 'hidden';
+        setTimeout(() => { preloader.style.display = 'none'; }, 500);
+    }, 1500);
 });
