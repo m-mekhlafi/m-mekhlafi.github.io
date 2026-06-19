@@ -545,12 +545,14 @@ let users = [
 // لأنه يضمن تحميل كل الصور والمحتوى قبل إخفاء الشاشة
 window.addEventListener('load', () => {
     const preloader = document.getElementById('cyber-preloader');
-
     if (preloader) {
-        // إضافة تأخير متعمد بسيط (مثلاً ثانية ونصف) لكي يستمتع الزائر برؤية الأنيميشن
-        // يمكنك تعديل الرقم 1500 (1.5 ثانية) حسب رغبتك، أو حذفه ليختفي فوراً
+        // تأخير ناعم لمدة ثانية ونصف لإظهار واجهة التحميل السبرانية
         setTimeout(() => {
-            preloader.classList.add('hidden');
+            preloader.style.opacity = '0';
+            preloader.style.visibility = 'hidden';
+            setTimeout(() => {
+                preloader.style.display = 'none';
+            }, 500);
         }, 1500);
     }
 });
